@@ -24,7 +24,7 @@ export default function Home() {
     setInput("");
     try {
       // Call /api/chat endpoint
-      const base = process.env.NEXT_PUBLIC_API_BASE_URL?.replace(/\/$/, "");
+      const base = process.env.NEXT_PUBLIC_API_BASE_URL;
       const res = await fetch(`${base}/api/chat`, {
         method: "POST",
         headers: {
