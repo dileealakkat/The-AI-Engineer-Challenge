@@ -16,7 +16,10 @@ app = FastAPI(title="OpenAI Chat API")
 # This allows the API to be accessed from different domains/origins
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Allows requests from any origin
+    allow_origins=[
+    "https://the-ai-engineer-challenge.vercel.app",
+    "https://the-ai-engineer-challenge-*.vercel.app",  # if you can wildcard
+],  # Allows requests from any origin
     allow_credentials=True,  # Allows cookies to be included in requests
     allow_methods=["*"],  # Allows all HTTP methods (GET, POST, etc.)
     allow_headers=["*"],  # Allows all headers in requests
@@ -34,8 +37,9 @@ class ChatRequest(BaseModel):
 @app.post("/api/chat")
 async def chat(request: ChatRequest):
     try:
+        print(f"[INFO] /api/chat called. Request: developer_message={request.developer_message}, user_message={request.user_message}, model={request.model}")
         # Initialize OpenAI client with the provided API key
-        client = OpenAI(api_key=request.api_key)
+        client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
         
         # Create an async generator function for streaming responses
         async def generate():
@@ -52,12 +56,14 @@ async def chat(request: ChatRequest):
             # Yield each chunk of the response as it becomes available
             for chunk in stream:
                 if chunk.choices[0].delta.content is not None:
+                    print(f"[DEBUG] Streaming chunk: {chunk.choices[0].delta.content}")
                     yield chunk.choices[0].delta.content
-
+        print("[INFO] Sending streaming response.")
         # Return a streaming response to the client
         return StreamingResponse(generate(), media_type="text/plain")
     
     except Exception as e:
+        print(f"[ERROR] Exception in /api/chat: {e}")
         # Handle any errors that occur during processing
         raise HTTPException(status_code=500, detail=str(e))
 
