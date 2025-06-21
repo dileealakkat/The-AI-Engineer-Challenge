@@ -15,9 +15,10 @@ app = FastAPI(title="OpenAI Chat API")
 # Configure CORS (Cross-Origin Resource Sharing) middleware
 # This allows the API to be accessed from different domains/origins
 app.add_middleware(
-    CORSMiddleware,
+    
     allow_origins=[
     "https://the-ai-engineer-challenge.vercel.app",
+    "https://the-ai-engineer-challenge-peach-one.vercel.app/",
     "https://the-ai-engineer-challenge-*.vercel.app",  # if you can wildcard
     "http://localhost:3000",
     "https://the-ai-engineer-challenge-backend.onrender.com"
