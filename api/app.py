@@ -19,6 +19,8 @@ app.add_middleware(
     allow_origins=[
     "https://the-ai-engineer-challenge.vercel.app",
     "https://the-ai-engineer-challenge-*.vercel.app",  # if you can wildcard
+    "http://localhost:3000",
+    "https://the-ai-engineer-challenge-backend.onrender.com"
 ],  # Allows requests from any origin
     allow_credentials=True,  # Allows cookies to be included in requests
     allow_methods=["*"],  # Allows all HTTP methods (GET, POST, etc.)
