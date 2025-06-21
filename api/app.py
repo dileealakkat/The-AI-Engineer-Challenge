@@ -25,7 +25,7 @@ app.add_middleware(
 ],  # Allows requests from any origin
     allow_credentials=True,  # Allows cookies to be included in requests
     allow_methods=["*"],  # Allows all HTTP methods (GET, POST, etc.)
-    allow_headers=["*"],  # Allows all headers in requests
+    allow_headers=["*"]  # Allows all headers in requests
 )
 
 # Define the data model for chat requests using Pydantic
