@@ -25,7 +25,7 @@ export default function Home() {
     try {
       // Call /api/chat endpoint
       const base = process.env.NEXT_PUBLIC_API_BASE_URL;
-      const res = await fetch(`${base}/api/chat`, {
+      const res = await fetch('/api/chat', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -33,8 +33,7 @@ export default function Home() {
         body: JSON.stringify({
           developer_message: "You are a helpful assistant.",
           user_message: input,
-          model: "gpt-4.1-mini",
-          //
+          model: "gpt-4.1-mini"
         }),
       });
       const data = await res.text();
