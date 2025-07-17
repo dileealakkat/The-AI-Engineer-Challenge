@@ -92,7 +92,7 @@ export default function Home() {
           <div ref={messagesEndRef} />
         </div>
         <form
-          className="flex p-4 border-t border-zinc-200"
+          className="flex p-4 border-t border-zinc-200 mt-4"
           onSubmit={(e) => {
             e.preventDefault();
             sendMessage();
